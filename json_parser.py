@@ -3,12 +3,15 @@ import json
 
 
 try:
-    script, json_path = argv
+    _, json_path = argv
 except ValueError:
     raise(ValueError('Script needs a path of json file'))
 
+if not json_path[-5:].lower() == ".json":
+    raise(ValueError("File extension must be '.json'"))
+
 with open(json_path) as f:
-    JSON = json.load(f)
+    json_data = json.load(f)
 
 
 def transform_to_list(j_object, lst=None):
@@ -30,4 +33,4 @@ def transform_to_list(j_object, lst=None):
     return lst
 
 
-print(transform_to_list(JSON))
+print(transform_to_list(json_data))
